@@ -37,7 +37,10 @@ while True:
     sio.emit('data', b64data)
 
     # 어떤 키가 눌릴 때까지 반복한다.
-    if cv2.waitKey(1) > 0: break
+    if cv2.waitKey(1) > 0: 
+        cap.release()
+        cv2.destroyAllWindows()
+        break
 
 # 위의 while true를 벗어나면, 서버와의 연결을 끊는다.
 sio.disconnect()
