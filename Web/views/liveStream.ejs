@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <%- include("./partials/head.ejs") %>
+        </style>
+        <script language="javascript">
+            function time(){
+            var time= new Date(); //시간받기위해서 new date
+            document.getElementById("now").innerHTML=time.getHours()+"시"+time.getMinutes()+"분"+time.getSeconds()+"초";
+            setInterval("time()",1000);     //1초 지난후 time()실행
+            }
+        </script>
+    </head>
+    <body onload="time()">
+        <%- include("./partials/header.ejs") %>
+        <img id="image">
+            <script src="/socket.io/socket.io.js"></script>
+            <script>
+                const socket = io.connect('http://localhost:3000/', { transports: ['websocket'] });
+                socket.on('image', (image) => {
+                console.log('tick');
+                const imageElem = document.getElementById('image');
+                imageElem.src = `data:image/jpeg;base64,${image}`;
+            });
+            </script>
+            <table border="1" id="info" >
+                <tr>
+                    <td>장소: </td>
+                    <td>시간: <span id="now" ></span></td>
+                </tr>
+            </table>
+        <%- include("./partials/footer.ejs") %>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<header>
+    <div class="head-wrap">
+        <div class="head-wrap-inner">
+            <h1><a href="admin.ejs">CCTV 관리 서비스</a></h1>
+            {% if user and user.id %}
+            <nav class="head-menu-top-nav">
+                <ul>     
+                    <li class="top-nav03"><a href="/auth/logout">Log out</a></li>
+                    <li class="top-nav04"><a href="/myPage">MyPage</a></li>
+                </ul>
+            </nav> 
+        </div>
+        <div class="head-wrap-sub">
+            <nav class="head-menu-main-nav">
+                <ul>
+                    <li><a href="admin.ejs">Home</a></li>
+                    <li><a href="LiveStream.ejs">CCTV LiveStream</a></li>
+                    <li><a href="https://ejnu-my.sharepoint.com/:f:/g/personal/183097_jnu_ac_kr/EtEKiq9VlCtLtpMcvSIQAzYBlCB6NNGuhJvlRauk3q1_xw?e=WW7FPq">과거 영상</a></li>
+                    <li><a href="">과거 결과</a></li>
+                    <li><a href="Register.ejs">사용자 등록</a></li>
+                    <li><a href="">사용자 삭제</a></li>            
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+        <nav class="head-menu-top-nav">
+            <ul>     
+                <li class="top-nav03"><a href="/auth/logIn">LogIn</a></li>
+            </ul>
+        </nav> 
+    </div>
+    <div class="head-wrap-sub">
+        <nav class="head-menu-main-nav">
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">CCTV LiveStream</a></li>
+                <li><a href="">과거 영상</a></li>
+                <li><a href="">과거 결과</a></li>
+                <li><a href="">사용자 등록</a></li>
+                <li><a href="">사용자 삭제</a></li>
+            </ul>
+        </nav>
+    </div>
+    </div>
+</header>
