@@ -9,7 +9,8 @@ import time
 import base64
 import socketio
 import datetime
-
+import json
+import time
 
 # In[11]:
 
@@ -51,11 +52,18 @@ def video_play() :
         if(tickCount > 1800) : 
             tickCount = 0
 
+            # JSON 파일을 이용해서, 데이터를 보낸다.
+            json_data = {'filename': filename, "start-time" : now.strftime('%Y-%m-%d-%H-%M-%S'), "end-time" : datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}
+            headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+
+            print("sand json file")
+            sio.emit('jsondata', json_data)
+
             #저장 파일 종료
             out.release()
 
             now = datetime.datetime.now()
-            filename = now.strftime("%Y") + "_" +             now.strftime("%m") + "_" + now.strftime("%d") + "_" + now.strftime("%H") +             "_" + now.strftime("%M") + "_" + now.strftime("%S") + ".avi"
+            filename = now.strftime("%Y") + "_" + now.strftime("%m") + "_" + now.strftime("%d") + "_" + now.strftime("%H") + "_" + now.strftime("%M") + "_" + now.strftime("%S") + ".avi"
             out = cv2.VideoWriter(filename, fourcc, fps, (int(width), int(height)))
 
         # 프레임과 이와 관련된 정보를 리턴 받는다.

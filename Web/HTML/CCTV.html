@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CCTV</title>
+    </head>
+    <body>
+        <img id="image">
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            const socket = io.connect('http://localhost:3000/', { transports: ['websocket'] });
+            socket.on('image', (image) => {
+                console.log('tick');
+                const imageElem = document.getElementById('image');
+                imageElem.src = `data:image/jpeg;base64,${image}`;
+            });
+        </script>
+    </body>
+</html>
