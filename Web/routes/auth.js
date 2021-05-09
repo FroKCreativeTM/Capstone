@@ -6,7 +6,13 @@ const User = require('../models/user');
 
 const router = express.Router();
 
-router.post('/join', isNotLoggedIn, async(req, res, next) =>{
+let authData = {
+    id: 'root',
+    password: 'root',
+    name: 'lee'
+};
+
+router.post('/register', isNotLoggedIn, async(req, res, next) =>{
     const password = req.body;
     try{
         const hash = await bcrypt.hash(password, 12);
@@ -35,7 +41,7 @@ router.post('/login', isNotLoggedIn, (req, res, next)=>{
                 console.error(loginError);
                 return next(loginError);
             }
-            return res.redirect('/');
+            return res.redirect('/admin');
         });
     })(req, res, next);//미들웨어 내의 미들웨어에는 (req, res, next)를 붙인다.
 })

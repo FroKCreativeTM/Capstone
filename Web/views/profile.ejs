@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="kr">
-    <%- include("./partials/head.ejs") %>
+  <head>
+    <title>CCTV Service</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/style.css">
+  </head>
     <body>
-        <%- include("./partials/header.ejs") %>
+        <%- include("./partials/adminHeader.ejs") %>
         <form id="register" name ="fo" method="get">
             <fieldset>
                 <legend> 사용자  정보 수정 </legend>
@@ -68,6 +72,5 @@
                 </div>
             </fieldset>
         </form>
-        <%- include("./partials/footer.ejs") %>
     </body>
 </html>
