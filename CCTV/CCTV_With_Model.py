@@ -53,7 +53,7 @@ def video_play() :
             tickCount = 0
 
             # JSON 파일을 이용해서, 데이터를 보낸다.
-            json_data = {'filename': filename, "start-time" : now.strftime('%Y-%m-%d-%H-%M-%S'), "end-time" : datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}
+            json_data = {'filename': filename, 'start-time' : now.strftime('%Y-%m-%d-%H-%M-%S'), 'end-time' : datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}
             headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 
             print("sand json file")
@@ -101,7 +101,7 @@ if __name__ == "__main__" :
     # 클라이언트 생성
     sio = socketio.Client()
     # loop IP : 
-    sio.connect('http://127.0.0.1:3000')
+    sio.connect('http://localhost:8001/')
     # 비디오를 플레이한다.
     video_play()
     # 통신 종료

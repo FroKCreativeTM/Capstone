@@ -6,7 +6,7 @@ import socketio
 # socketIO를 이용해서 클라이언트 하나를 생성한다.
 sio = socketio.Client()
 # loop IP : 
-sio.connect('http://127.0.0.1:3000')
+sio.connect('http://127.0.0.1:8001')
 
 # 카메라는 현재 컴퓨터에 연결되어있는 1번 카메라를 가져온다.
 cap = cv2.VideoCapture(0)

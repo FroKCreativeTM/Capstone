@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="kr">
+    <head>
+        <title>CCTV Service</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/style.css">
+        <script language="javascript">
+            function time(){
+                var time= new Date(); //시간받기위해서 new date
+                document.getElementById("now").innerHTML=time.getHours()+"시"+time.getMinutes()+"분"+time.getSeconds()+"초";
+                setInterval("time()",1000);     //1초 지난후 time()실행
+            }
+        </script>
+    </head>
+    <body onload="time()">
+        <%- include("./partials/adminHeader.ejs") %>
+        <img id="image">
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            const socket = io.connect('http://localhost:8001/', { transports: ['websocket'] });
+            socket.on('image', (image) => {
+                console.log('tick');
+                const imageElem = document.getElementById('image');
+                imageElem.src = `data:image/jpeg;base64,${image}`;
+            });
+        </script>
+        <table border="1" id="info" >
+            <tr>
+                <td>장소: </td>
+                <td>시간: <span id="now" ></span></td>
+            </tr>
+        </table>
+    </body>
+</html>
