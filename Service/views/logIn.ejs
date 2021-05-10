@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="kr">
   <head>
-    <title>CCTV Service</title>
+    <title>CCTV 서비스</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
     <%- include("./partials/loginHeader.ejs") %>
+    <div  class="svg-div" onclick="location.href='/login"><%- include ("./images/cctv-svgrepo-com.svg") %></div>
+    
+    
     <section class="login-input-section-wrap">
       <form action="/auth/login" id="Login" name="fo" method="POST">
         <div class="login-input-wrap"><input type="text" size="15" class="login-input" name="id" placeholder="아이디"></div>
@@ -22,5 +25,6 @@
         </div>
       </form>
     </section>
+    <%- include("./partials/footer.ejs") %> 
   </body>  
 </html>

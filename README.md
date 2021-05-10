@@ -34,3 +34,4 @@ ejs에 영상 데이터 보내는 작업 완료. <br/>
 admin페이지 안들어가지던거 수정</br>
 CCTV 변경한거 적용 - @Lee<br/>
 cctv 이미지 출처(https://unsplash.com/photos/oQD9uq4Rd4I)
+cctv svg 이미지 출처(https://www.svgrepo.com/svg/8270/cctv)
