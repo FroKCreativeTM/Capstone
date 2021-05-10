@@ -7,11 +7,10 @@
   </head>
     <body>
         <%- include("./partials/adminHeader.ejs") %> 
-	    <form> 
+	    <form class="button-form">
             <%- include("./partials/button.ejs") %>
             <input type="button" id="사용자등록" value="사용자 등록" name="var_value" onclick="location.href='/register'">
-	        <input type="button" id="사용자삭제" value="사용자 삭제" name="var_value" onclick="location.href='/DelUser'");
-            });">        
+	        <input type="button" id="사용자삭제" value="사용자 삭제" name="var_value" onclick="location.href='/DelUser'">        
         </form>    
     </body>
 </html>

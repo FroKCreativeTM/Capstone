@@ -8,9 +8,9 @@
   <body>
     <%- include("./partials/loginHeader.ejs") %>
     <section class="login-input-section-wrap">
-    <form action="/auth/login" id="Login" name="fo" method="POST">
-        <div class="login-input-wrap"><input type="text" size="15" id="id" naem="id" placeholder="아이디"></div>
-        <div class="login-input-wrap password-wrap"><input type="password" id="pass" size="15" name="password" placeholder="비밀번호"></div>
+      <form action="/auth/login" id="Login" name="fo" method="POST">
+        <div class="login-input-wrap"><input type="text" size="15" class="login-input" name="id" placeholder="아이디"></div>
+        <div class="login-input-wrap password-wrap"><input type="password" calss="password-input" size="15" name="password" placeholder="비밀번호"></div>
         <div class="login-button-wrap"><input type="submit" value="Login"></div>
         <div class="login-auth">
           <label>
@@ -19,8 +19,8 @@
           <label>
             <input class="hide" type="radio" name="auth" value="1">사용자
           </label>
-          </div>
-    </form> 
-  </section>
+        </div>
+      </form>
+    </section>
   </body>  
 </html>
