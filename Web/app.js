@@ -1,5 +1,4 @@
 const express = require('express');
-
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
@@ -14,6 +13,7 @@ const authRouter = require('./routes/auth');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 const { use } = require('./routes/page');
+
 
 const app = express();
 passportConfig();//패스포트 설정
@@ -31,9 +31,6 @@ sequelize.sync({ force: false })
 });
 app.use(morgan('dev'));
  
-//const server = require('http')
-//const io = require('socket.io')(server);
-
 app.use(express.static("./public"));
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(express.json());

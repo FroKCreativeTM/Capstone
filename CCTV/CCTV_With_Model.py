@@ -82,7 +82,7 @@ def video_play() :
     # 비디오 실행
     while True:
         # 30프레임이니 한 번씩 재운다.
-        time.sleep(1 / fps)
+        time.sleep(1000 / fps)
 
         # 만약 1분이 지난다면, 비디오를 따로 빼기 위해서, 다시 설정한다.
         if(tickCount > 1800) : 

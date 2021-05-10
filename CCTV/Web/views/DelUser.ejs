@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <title>CCTV Service</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+    <body>
+        <%- include("./partials/adminHeader.ejs") %>
+        <div id ="table_layout">
+            <table border="0">
+                <thead>
+                    <tr>
+                        <th>id(사번)</th>
+                        <th>이름</th>
+                        <th>부서</th>
+                        <th>직책</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>               
+                    </tr>
+        
+                    <td><input type="submit" value="삭제"><input type="reset" value="초기화"><input type="button" value="취소" onclick="location.href='admin.html'"></td>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
