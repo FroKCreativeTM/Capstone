@@ -1,1 +1,0 @@
-python ../CCTV/CCTV_With_Model.py
