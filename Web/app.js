@@ -31,9 +31,6 @@ sequelize.sync({ force: false })
 });
 app.use(morgan('dev'));
  
-//const server = require('http')
-//const io = require('socket.io')(server);
-
 app.use(express.static("./public"));
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(express.json());
@@ -67,7 +64,8 @@ app.use((err, req, res, next) =>{
   res.render('error');
 })
 
-/*
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 // 커넥션이 있을 때
 // 즉, 클리이언트(여기서는 모델)이 연결되어 있을 때, 이 함수를 처리힙니다.
 io.on('connection', function (socket) {
@@ -76,9 +74,14 @@ io.on('connection', function (socket) {
         var frame = Buffer.from(data, 'base64').toString();
         // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
         io.emit('image', frame);
-    })
+    });
+    socket.on('jsondata', function (data) {
+      // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
+      io.emit('jsonData', data);
+      console.log(data);
+  });
 });
-*/
+
 
 app.listen(app.get('port'), () => {
     console.log(app.get('port'), '번 포트에서 대기 중');
