@@ -6,15 +6,12 @@
     <link rel="stylesheet" href="/style.css">
   </head>
     <body>
-        <%- include("./partials/adminHeader.ejs") %>
-        <h1><a href="admin.html">CCTV 서비스</a></h1>
-        <hr>   
+        <%- include("./partials/adminHeader.ejs") %> 
 	    <form> 
             <%- include("./partials/button.ejs") %>
             <input type="button" id="사용자등록" value="사용자 등록" name="var_value" onclick="location.href='/enroll'">
 	        <input type="button" id="사용자삭제" value="사용자 삭제" name="var_value" onclick="location.href='/DelUser'");
             });">        
-        </form> 
-        <%- include("./partials/footer.ejs") %>   
+        </form>    
     </body>
 </html>

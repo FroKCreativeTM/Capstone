@@ -3,10 +3,10 @@
         <div class="head-wrap-inner">
             <h1><a href="/admin">CCTV 관리 서비스</a></h1>
             <nav class="head-menu-top-nav">
-                <ul>     
-                    <li class="top-nav03"><a href="/logout">Log out</a></li>
-                    <li class="top-nav04"><a href="/profile">MyPage</a></li>
-                </ul>
+                <form action="/auth/logout" id="Logout" name="fo" method="POST">     
+                    <input class="top-nav01" type="submit" value="logout"></input>
+                    <input class="top-nav02" type="button" value="Mypage" onclick="location.href='/adminProfile'"></input>
+                </form>
             </nav> 
         </div>
         <div class="head-wrap-sub">

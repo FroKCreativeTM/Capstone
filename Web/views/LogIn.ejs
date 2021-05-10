@@ -7,14 +7,20 @@
   </head>
   <body>
     <%- include("./partials/loginHeader.ejs") %>
-    <form id="Login" name="fo" method="get">
-       <input type="text" size="15" placeholder="아이디">
-        <br>
-        <input type="password" size="15" placeholder="비밀번호">
-        <input type="submit" value="로그인">
-        <br>
-        <input type="radio" name="auth" value="1" checked> 관리자
-        <input type="radio" name="auth" value="2"> 사용자
-    </form>  
-  </body>
+    <section class="login-input-section-wrap">
+    <form action="/auth/login" id="Login" name="fo" method="POST">
+        <div class="login-input-wrap"><input type="text" size="15" id="id" naem="id" placeholder="아이디"></div>
+        <div class="login-input-wrap password-wrap"><input type="password" id="pass" size="15" name="password" placeholder="비밀번호"></div>
+        <div class="login-button-wrap"><input type="submit" value="Login"></div>
+        <div class="login-auth">
+          <label>
+            <input class="hide" type="radio" name="auth" value="0" checked>관리자
+          </label>
+          <label>
+            <input class="hide" type="radio" name="auth" value="1">사용자
+          </label>
+          </div>
+    </form> 
+  </section>
+  </body>  
 </html>

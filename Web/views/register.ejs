@@ -7,7 +7,7 @@
     </head>
     <body>
       <%- include("./partials/adminHeader.ejs") %>
-      <form id="register" name ="fo" method="get">
+      <form id="register" action="/auth/register" name ="fo" method="POST">
         <fieldset>
           <legend> 사용자 등록 </legend>
           <div class ="table_layout">
@@ -62,7 +62,7 @@
                     <td><input type="radio" name="authority" value="0">관리자
                     <input type="radio" name="authority" value="1" checked>사용자</td>                 
                 </tr>
-                <td><input type="submit" value="확인"><input type="reset" value="초기화"><input type="button" value="취소" onclick="location.href='admin.html'"></td>  
+                <td><input type="submit" value="확인"><input type="reset" value="초기화"><input type="button" value="취소" onclick="location.href='/admin'"></td>  
               </tbody>
             </table>
           </div>

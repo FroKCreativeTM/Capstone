@@ -8,7 +8,9 @@ module.exports=()=>{
     passport.use(new LocalStrategy({
         usernameField: 'id',
         passwordField: 'password',
+        passReqToCallback:true,//콜백함수에 req 객체를 넘길지 여부
     }, async(id, password, done)=>{
+        console.log('LocalStrategy', id, password);
         try{
             const exUser = await User.findOne({where: { id } });
             if(exUser){

@@ -1,39 +1,39 @@
 const express = require('express');
 
-const{isLoggedIn, isNotLoggedIn} = require('./middlewares');
-
 const router = express.Router();
 router.use((req, res, next)=>{
     res.locals.ueser=req.user;
     next();
 });
 
-router.get('/profile', isLoggedIn, (req, res)=>{
-    res.render('profile', { title: '내 정보 - capstoneweb'});
+router.get('/userProfile',(req, res)=>{
+    res.render('userProfile');
+});
+router.get('/adminProfile',(req, res)=>{
+    res.render('adminProfile');
+});
+router.get('/enroll', (req, res) =>{
+    res.render('enroll');
 });
 
-router.get('/enroll', isLoggedIn, (req, res) =>{
-    res.render('enroll', {title: '회원가입 - capstoneweb'});
+router.get('/', (req,res,next)=>{
+    res.render('login');
 });
 
-router.get('/', isNotLoggedIn, (req,res,next)=>{
-    res.render('login', {title:'로그인'});
+router.get('/admin', (req,res)=>{
+    res.render('admin');
 });
 
-router.get('/admin', isLoggedIn, (req,res)=>{
-    res.render('admin', {title:'관리자 페이지'});
+router.get('/umain', (req,res)=>{
+    res.render('umain');
 });
 
-router.get('/umain', isLoggedIn, (req,res)=>{
-    res.render('umain', {title:'사용자 페이지'});
+router.get('/DelUser',(req,res)=>{
+    res.render('DelUser');
 });
 
-router.get('/DelUser', isLoggedIn, (req,res)=>{
-    res.render('DelUser', {title:'사용자 삭제'});
-});
-
-router.get('/liveStream', isLoggedIn, (req,res)=>{
-    res.render('liveStream', {title:'CCTV Live Stream'});
+router.get('/liveStream', (req,res)=>{
+    res.render('liveStream');
 });
 
 module.exports = router;
