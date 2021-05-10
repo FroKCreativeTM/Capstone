@@ -19,8 +19,8 @@ from tensorflow.keras.models import Model, Sequential
 from keras.models import model_from_json 
 
 # 모델 가져오기
-vgg_json_file = open("vgg_model.json", "r")
-lstm_json_file = open("lstm_model.json", "r")
+vgg_json_file = open("./aimodel/vgg_model.json", "r")
+lstm_json_file = open("./aimodel/lstm_model.json", "r")
 
 vgg_loaded_model_json = vgg_json_file.read() 
 vgg_json_file.close()
@@ -30,8 +30,8 @@ lstm_json_file.close()
 vgg_loaded_model = model_from_json(vgg_loaded_model_json)
 lstm_loaded_model = model_from_json(lstm_loaded_model_json)
 
-vgg_loaded_model.load_weights("vgg_model_weight.h5")
-lstm_loaded_model.load_weights("lstm_model_weight.h5")
+vgg_loaded_model.load_weights("./aimodel/vgg_model_weight.h5")
+lstm_loaded_model.load_weights("./aimodel/lstm_model_weight.h5")
 print("Loaded model from disk")
 
 vgg_loaded_model.compile(loss='binary_crossentropy', optimizer='adam',metrics=['accuracy'])
@@ -67,7 +67,7 @@ def video_play() :
 
     # 파일과 코덱 설정한 뒤 비디오라이터를 생성해서, 나갈 파일을 생성한다.
     fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-    filename = now.strftime("%Y") + "_" +     now.strftime("%m") + "_" + now.strftime("%d") + "_" + now.strftime("%H") +     "_" + now.strftime("%M") + "_" + now.strftime("%S") + ".avi"
+    filename = "./aimodel/movie/" + now.strftime("%Y") + "_" +     now.strftime("%m") + "_" + now.strftime("%d") + "_" + now.strftime("%H") + "_" + now.strftime("%M") + "_" + now.strftime("%S") + ".avi"
     out = cv2.VideoWriter(filename, fourcc, fps, (int(width), int(height)))
 
     # 인코드 파라미터를 설정한다.
@@ -75,6 +75,7 @@ def video_play() :
 
     fi_count = 0
     no_count = 0
+    pred_image_cnt = 10
 
     count = 0
     pred_images = []
@@ -82,7 +83,7 @@ def video_play() :
     # 비디오 실행
     while True:
         # 30프레임이니 한 번씩 재운다.
-        time.sleep(1000 / fps)
+        time.sleep(1 / fps)
 
         # 만약 1분이 지난다면, 비디오를 따로 빼기 위해서, 다시 설정한다.
         if(tickCount > 1800) : 
@@ -103,7 +104,7 @@ def video_play() :
             out.release()
 
             now = datetime.datetime.now()
-            filename = now.strftime("%Y") + "_" + now.strftime("%m") + "_" + now.strftime("%d") + "_" + now.strftime("%H") + "_" + now.strftime("%M") + "_" + now.strftime("%S") + ".avi"
+            filename =  "./aimodel/movie/" + now.strftime("%Y") + "_" + now.strftime("%m") + "_" + now.strftime("%d") + "_" + now.strftime("%H") + "_" + now.strftime("%M") + "_" + now.strftime("%S") + ".avi"
             out = cv2.VideoWriter(filename, fourcc, fps, (int(width), int(height)))
 
         # 프레임과 이와 관련된 정보를 리턴 받는다.
@@ -124,8 +125,8 @@ def video_play() :
         pred_images.append(pred_data)
         count += 1
 
-        # 30프레임마다 lstm 훈련을 실시한다.
-        if count == 5 : 
+        # 10프레임마다 lstm 훈련을 실시한다.
+        if count == pred_image_cnt : 
             final_data = lstm_loaded_model.predict(np.array(pred_images))
             print(final_data)
             print(type(final_data[0][1]))
@@ -133,13 +134,27 @@ def video_play() :
             total_no = 0
             total_fi = 0 
             
-            for i in range(0, 5) :             
+            for i in range(0, pred_image_cnt) : 
                 total_fi += float(final_data[i][0])
                 total_no += float(final_data[i][1])
             
             if((total_no) > (total_fi)) : 
+                json_data = {'pred_type': 'Non-Violence', \
+                    'time' : datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S'),\
+                    'Violence - percent' : (total_fi * 100) / pred_image_cnt, \
+                    'Non -Violence - percent' : (total_no * 100) / pred_image_cnt
+                    }
+                headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}                
+                sio.emit('pred_data', json_data)
                 print('no')
             else : 
+                json_data = {'pred_type': 'Violence', \
+                    'time' : datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S'),\
+                    'Violence - percent' : (total_fi * 100) / pred_image_cnt, \
+                    'Non -Violence - percent' : (total_no * 100) / pred_image_cnt
+                    }
+                headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}                
+                sio.emit('pred_data', json_data)
                 print('fi')
             
             # 리스트를 비우지 않으면, 계속 데이터가 남는다.
@@ -158,7 +173,7 @@ def video_play() :
         # base64 타입으로 변환한다.
         b64data = base64.b64encode(frame)
         # 이 데이터를 data 태그를 붙이고, 소켓으로 NodeJS 서버에 보낸다.
-        sio.emit('data', b64data)
+        sio.emit('image_data', b64data)
 
         # tickCount 1 증가
         tickCount += 1
@@ -183,7 +198,6 @@ if __name__ == "__main__" :
     sio.connect('http://localhost:8001/')
     # use the model
     transfer_layer = vgg_loaded_model.get_layer('fc2')
-
     image_model_transfer = Model(inputs=vgg_loaded_model.input, outputs=transfer_layer.output)
     # 비디오를 플레이한다.
     video_play()
