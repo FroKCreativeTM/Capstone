@@ -14,14 +14,14 @@
     </head>
     <body onload="time()">
         <%- include("./partials/adminHeader.ejs") %>
-        <img id="image">
+        <img id="image" width="640" height="480">
             <script src="/socket.io/socket.io.js"></script>
             <script>
-                const socket = io.connect('http://localhost:3000/', { transports: ['websocket'] });
+                const socket = io.connect('http://localhost:8001/', { transports: ['websocket'] });
                 socket.on('image', (image) => {
-                console.log('tick');
-                const imageElem = document.getElementById('image');
-                imageElem.src = `data:image/jpeg;base64,${image}`;
+                    console.log('tick');
+                    const imageElem = document.getElementById('image');
+                    imageElem.src = `data:image/jpeg;base64,${image}`;
             });
             </script>
             <table border="1" id="info" >

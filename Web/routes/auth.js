@@ -22,6 +22,7 @@ router.post('/register', isNotLoggedIn, async(req, res, next) =>{
 //여기까지 회원가입 라우터
 
 router.post('/login', isNotLoggedIn, (req, res, next)=>{
+    return res.redirect('/admin');
     passport.authenticate('local', (authError, user, info) =>{
         if(authError){
             console.log(req.id, req.password);
@@ -30,7 +31,7 @@ router.post('/login', isNotLoggedIn, (req, res, next)=>{
         }//실패
         if(!user){
             console.log(req.id, req.password);
-            return res.redirect(`/login`);
+            return res.redirect('/login');
         }//성공 => req객체에 login과 logout 메서드 추가
         return req.login(user, (loginError)=>{
             if(loginError){
@@ -43,7 +44,8 @@ router.post('/login', isNotLoggedIn, (req, res, next)=>{
 })
 //로그인 라우터
 
-router.get('/logout', isLoggedIn, (req,res)=>{
+router.post('/logout', isLoggedIn, (req,res)=>{
+    return res.redirect('/login');
     req.logout();
     req.session.destroy();
     res.redirect('/login');

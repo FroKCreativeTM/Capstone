@@ -12,8 +12,8 @@ router.get('/userProfile',(req, res)=>{
 router.get('/adminProfile',(req, res)=>{
     res.render('adminProfile');
 });
-router.get('/enroll', (req, res) =>{
-    res.render('enroll');
+router.get('/register', (req, res) =>{
+    res.render('register');
 });
 
 router.get('/', (req,res,next)=>{
