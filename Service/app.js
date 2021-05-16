@@ -7,10 +7,18 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const passport = require('passport');
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
 dotenv.config();
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
 const passportConfig = require('./passport');
+<<<<<<< HEAD
+=======
+const { sequelize } = require('./models');
+>>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
 const exec = require('child_process').execFile;
 const { use } = require('./routes/page');
 
@@ -21,6 +29,19 @@ app.set('port', process.env.PORT || 8001);
 app.set('view engine', 'ejs');
 app.set('views','./views');
 
+<<<<<<< HEAD
+=======
+
+sequelize.sync({ force: false })
+.then(() =>{
+  console.log('데이터베이스 연결 성공');
+})
+.catch((err) =>{
+  console.error(err);
+});
+
+
+>>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
 app.use(morgan('dev'));
  
 app.use(express.static("./public"));
@@ -87,10 +108,17 @@ io.on('connection', function (socket) {
 
 server.listen(app.get('port'), () => {
     // batch 파일
+<<<<<<< HEAD
     exec('CCTV.bat', function(err, data) {  
       console.log(err)
       console.log(data.toString());                       
     });  
+=======
+    /*exec('CCTV.bat', function(err, data) {  
+      console.log(err)
+      console.log(data.toString());                       
+    });*/  
+>>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
 
     console.log(app.get('port'), '번 포트에서 대기 중');
 });

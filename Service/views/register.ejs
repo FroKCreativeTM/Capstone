@@ -25,6 +25,7 @@
                   <td> *ID는 사번으로 자동 배정됩니다.</td>
                 </tr>
                 <tr>
+<<<<<<< HEAD
                   <th>*비밀번호</th> 
                   <td><input type="password" size="20" placeholder="password" required></td>
                   <th>*비밀번호 확인</th>
@@ -35,12 +36,29 @@
                   <td><input type="text" size="20" placeholder="User Name" required></td>
                   <th>전화번호</th>
                   <td><input type="tel" placeholder="010-1234-5678"></td>
+=======
+                  <th>비밀번호</th> 
+                  <td><input type="password" size="20" name="inputPassword" placeholder="비밀번호를 입력하세요" required></td>
+                  <th>비밀번호 확인</th>
+                  <td><input type="password" placeholder="비밀번호 확인" required></td>
+                </tr>
+                <tr>
+                  <th>이름</th>
+                  <td><input type="text" size="20" name="inputName" placeholder="이름을 입력하세요" required></td>
+                  <th>전화번호</th>
+                  <td><input type="tel" name="inputTele" placeholder="전화번호를 입력하세요"></td>
+>>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
                 </tr>
                 <tr>
                   <th>부서</th>
                     <td>
+<<<<<<< HEAD
                       <select name="department">
                         <datalist id="department">
+=======
+                      <select name="inputDept">
+                        <datalist id="inputDept">
+>>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
                           <option value="1" selected>CCTV 사용자</option>
                           <option value="2">CCTV 관리자</option>
                           <option value="3">데이터베이스 관리자</option>
@@ -48,19 +66,37 @@
                     </td>
                     <th>직책</th>
                     <td>
+<<<<<<< HEAD
                       <select name="position">
                         <datalist id="position">
+=======
+                      <select name="inputRank">
+                        <datalist id="inputRank">
+>>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
                           <option value="1" selected>부서장</option>
                           <option value="2">부서원</option>
                         </datalist>
                     </td>
                 </tr>
                 <tr>
+<<<<<<< HEAD
                   <th>생일</th>
                     <td><input type="date" id='currentDate' required></td>
                     <th>권한</th>
                     <td><input type="radio" name="authority" value="0">관리자
                     <input type="radio" name="authority" value="1" checked>사용자</td>                 
+=======
+                  <th>주소</th>
+                  <td> <input type="text" name="inputAddr" placeholder="주소를 입력하세요" maxlength="50"></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>생일</th>
+                    <td><input type="date" name='inputBirth' required></td>
+                    <th>권한</th>
+                    <td><input type="radio" name="inputUserType" value="0">관리자
+                    <input type="radio" name="inputUserType" value="1" checked>사용자</td>                 
+>>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
                 </tr>
                 <td><input type="submit" value="확인"><input type="reset" value="초기화"><input type="button" value="취소" onclick="location.href='/admin'"></td>  
               </tbody>
@@ -68,5 +104,9 @@
           </div>
         </fieldset>
       </form>
+<<<<<<< HEAD
+=======
+      <%- include("./partials/footer.ejs") %> 
+>>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
     </body>
 </html>
