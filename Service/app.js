@@ -7,10 +7,12 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const passport = require('passport');
 
+
 dotenv.config();
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
 const passportConfig = require('./passport');
+const { sequelize } = require('./models');
 const exec = require('child_process').execFile;
 const { use } = require('./routes/page');
 
@@ -20,6 +22,16 @@ passportConfig();//패스포트 설정
 app.set('port', process.env.PORT || 8001);
 app.set('view engine', 'ejs');
 app.set('views','./views');
+
+
+sequelize.sync({ force: false })
+.then(() =>{
+  console.log('데이터베이스 연결 성공');
+})
+.catch((err) =>{
+  console.error(err);
+});
+
 
 app.use(morgan('dev'));
  
@@ -87,10 +99,10 @@ io.on('connection', function (socket) {
 
 server.listen(app.get('port'), () => {
     // batch 파일
-    exec('CCTV.bat', function(err, data) {  
+    /*exec('CCTV.bat', function(err, data) {  
       console.log(err)
       console.log(data.toString());                       
-    });  
+    });*/  
 
     console.log(app.get('port'), '번 포트에서 대기 중');
 });

@@ -1,39 +1,42 @@
 const express = require('express');
+const {isLoggedIn,isNotLoggedIn}=require('./middlewares');
+
 
 const router = express.Router();
 router.use((req, res, next)=>{
-    res.locals.ueser=req.user;
+    res.locals.user=req.user;
     next();
 });
 
-router.get('/userProfile',(req, res)=>{
+router.get('/userProfile',isLoggedIn,(req, res)=>{
     res.render('userProfile');
 });
-router.get('/adminProfile',(req, res)=>{
+router.get('/adminProfile',isLoggedIn,(req, res)=>{
     res.render('adminProfile');
 });
-router.get('/register', (req, res) =>{
+router.get('/register', isNotLoggedIn, (req, res) =>{
     res.render('register');
 });
 
-router.get('/', (req,res,next)=>{
+router.get('/', isNotLoggedIn,(req,res,next)=>{
     res.render('login');
 });
 
-router.get('/admin', (req,res)=>{
+router.get('/admin', isNotLoggedIn, (req,res)=>{
     res.render('admin');
 });
 
-router.get('/umain', (req,res)=>{
+router.get('/umain', isLoggedIn, (req,res)=>{
     res.render('umain');
 });
 
-router.get('/DelUser',(req,res)=>{
+router.get('/DelUser',isLoggedIn,(req,res)=>{
     res.render('DelUser');
 });
 
-router.get('/liveStream', (req,res)=>{
+router.get('/liveStream',isLoggedIn, (req,res)=>{
     res.render('liveStream');
 });
+
 
 module.exports = router;

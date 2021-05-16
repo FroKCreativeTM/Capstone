@@ -9,28 +9,39 @@
         <%- include("./partials/adminHeader.ejs") %>
         <div id ="table_layout">
             <form>            
-                <table border="0">
+                <table id="user-list" border="0">
                 <thead>
                     <tr>
                         <th>id(사번)</th>
                         <th>이름</th>
-                        <th>부서</th>
-                        <th>직책</th> 
+                        <th>부서</th> 
+                        <th>직책</th>
+                        <th>번호</th>
+                        <th>생년월일</th>
+                        <th>주소</th> 
                     </tr>
                 </thead>
                 <tbody>
+                    {% for user in users %}
                     <tr>
                         <td><input type="checkbox"></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>               
+                        <td>{{user.idusers}}</td>
+                        <td>{{user.name}}</td>
+                        <td>{{user.Dept}}</td>
+                        <td>{{user.rank}}</td>
+                        <td>{{user.tele}}</td>
+                        <td>{{user.birth}}</td>
+                        <td>{{user.addr}}</td>                    
                     </tr>
+                   
                     <td><input type="submit" value="삭제"></input></td>
                     <td><input type="reset" value="초기화"></input></td>
                     <td><button value="취소" onclick="location.href='/admin'"></button></td>
+                    {% endfor %}
                 </tbody>
             </table>
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <script src="/usercheck.js"></script>
             </form>
         </div>
         <%- include("./partials/footer.ejs") %> 
