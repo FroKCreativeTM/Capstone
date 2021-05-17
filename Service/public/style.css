@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
   
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
 :root {
      --color-beige:#f6f5ee;
      --color-font-black: #333;
@@ -19,15 +16,10 @@
    color:var(--color-font-black);
    font-family: var(--font-family);
 }
-<<<<<<< HEAD
-body{
-    background-color: var(--body-background-color);
-=======
 
 body{
     background-color: var(--body-background-color);
     width: 100%;
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
 }
 header{
     border-top: solid 2px black;
@@ -43,31 +35,19 @@ header{
 header .head-wrap{
     border:var( --temp-border);
     height: 120px;
-<<<<<<< HEAD
-    width: 1100px;
-=======
     width: 100%;
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
 }
         
 header .head-wrap .head-wrap-inner{
     height: 120px;
-<<<<<<< HEAD
-    width: 1100px;
-=======
     width: 100%;
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
     position: relative;
     border:var( --temp-border);
 }
 
 header .head-wrap .head-wrap-inner .head-menu-top-nav{
     position: absolute;
-<<<<<<< HEAD
-    left:552px;
-=======
     right:100px;
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
     top:21px;
 }
 
@@ -85,29 +65,17 @@ header .head-wrap .head-wrap-inner .head-menu-top-nav input{
 }
         
 header .head-wrap .head-wrap-inner .head-menu-top-nav form .top-nav01{
-<<<<<<< HEAD
-    width:200px;
-    background-color: var(--color-beige);
-}
-header .head-wrap .head-wrap-inner .head-menu-top-nav form .top-nav02{
-    width:200px;
-=======
     width:150px;
     background-color: var(--color-beige);
 }
 header .head-wrap .head-wrap-inner .head-menu-top-nav form .top-nav02{
     width:150px;
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
 }
             
 header .head-wrap-sub{
     position: absolute;
     top:60px;
-<<<<<<< HEAD
-    width: 1100px;
-=======
     width: 100%;
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
     height: 66px;
     border:var( --temp-border);
 }
@@ -119,11 +87,7 @@ header .head-wrap-sub{
             
 header .head-wrap-sub ul{
     list-style: none;
-<<<<<<< HEAD
-    width: 737px;
-=======
     width: 1000px;
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
     display: flex;
     justify-content:space-between;
     border:var( --temp-border);
@@ -182,13 +146,6 @@ input[type = button]{
     border: solid 1px var(--color-beige);
     background-color: var(--color-beige);
 }
-<<<<<<< HEAD
-#live영상{
-    width:750pt;
-    height:100pt; 	
-    top:180px;
-    left:30px;
-=======
 
 #live영상{
     width:650pt;
@@ -196,38 +153,10 @@ input[type = button]{
     top:180px;
     left: 50%;
     margin-left: -325pt;
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
     position:absolute;
 }
 #과거영상{
     top:350px;
-<<<<<<< HEAD
-    left:30px;
-    width:750pt;
-    height:100pt;
-    position:absolute;
-}
-#과거결과{
-    top:520px;
-    left:30px;
-    width:750pt;
-    height:100pt;
-    position:absolute;
-}
-#사용자등록{
-    top:690px;
-    left:30px;
-    width:750pt;
-    height:100pt;
-    position:absolute;
-}
-#사용자삭제{
-    top:860px;
-    left:30px;
-    width:750pt;
-    height:100pt;
-    position:absolute;
-=======
     width:650pt;
     height:100pt;
     position:absolute;
@@ -267,7 +196,6 @@ input[type = button]{
     margin-top: -125px;
     margin-left: -235px;
     position: absolute;
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
 }
 .login-input-section-wrap{
 	padding-top: 60px;
@@ -276,10 +204,6 @@ input[type = button]{
 	align-items: center;
     padding-left:20%;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
 .login-input-wrap{
 	width: 465px;
 	height :48px;
@@ -326,8 +250,6 @@ input[type = button]{
 	padding-left: 5px;
 	line-height: 25px;
 }
-<<<<<<< HEAD
-=======
 .button-table{
     margin: 0;
     padding: 0;
@@ -359,4 +281,3 @@ footer {
     width: 160px;
     height: 160px;
 }
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846

@@ -1,16 +1,10 @@
 {
   "development": {
     "username": "root",
-<<<<<<< HEAD
     "password": "keAarwrm76*",
-    "database": "database_development",
-    "host": "127.0.0.1",
-=======
-    "password": "root",
     "database": "capstone",
     "host": "127.0.0.1",
-    "port":"3306",
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
+    "port":"8001",
     "dialect": "mysql"
   },
   "test": {

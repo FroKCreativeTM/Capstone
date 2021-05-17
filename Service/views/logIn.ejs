@@ -1,33 +1,12 @@
 <!DOCTYPE html>
 <html lang="kr">
   <head>
-<<<<<<< HEAD
-    <title>CCTV Service</title>
-=======
     <title>CCTV 서비스</title>
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
     <meta charset="utf-8">
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
     <%- include("./partials/loginHeader.ejs") %>
-<<<<<<< HEAD
-    <section class="login-input-section-wrap">
-    <form action="/auth/login" id="Login" name="fo" method="POST">
-        <div class="login-input-wrap"><input type="text" size="15" id="id" naem="id" placeholder="아이디"></div>
-        <div class="login-input-wrap password-wrap"><input type="password" id="pass" size="15" name="password" placeholder="비밀번호"></div>
-        <div class="login-button-wrap"><input type="submit" value="Login"></div>
-        <div class="login-auth">
-          <label>
-            <input class="hide" type="radio" name="auth" value="0" checked>관리자
-          </label>
-          <label>
-            <input class="hide" type="radio" name="auth" value="1">사용자
-          </label>
-          </div>
-    </form> 
-  </section>
-=======
     <div  class="svg-div" onclick="location.href='/login'"><%- include ("./images/cctv-svgrepo-com.svg") %></div>
     
     
@@ -47,6 +26,5 @@
       </form>
     </section>
     <%- include("./partials/footer.ejs") %> 
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
   </body>  
 </html>
