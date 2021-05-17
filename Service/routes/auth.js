@@ -67,7 +67,7 @@ router.post('/logout', isLoggedIn, (req,res)=>{
     //return res.redirect('/login');
     req.logout();
     req.session.destroy();
-    res.redirect('/login');
+    res.redirect('/');
 });
 //로그아웃 라우터
 
