@@ -34,7 +34,8 @@ router.get('/DelUser',isLoggedIn,(req,res)=>{
     res.render('DelUser');
 });
 
-router.get('/liveStream',isLoggedIn, (req,res)=>{
+// router.get('/liveStream',isLoggedIn, (req,res)=>{
+router.get('/liveStream', (req,res)=>{
     res.render('liveStream');
 });
 

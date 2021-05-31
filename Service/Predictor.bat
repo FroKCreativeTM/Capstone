@@ -1,0 +1,1 @@
+python ./aimodel/predictor.py

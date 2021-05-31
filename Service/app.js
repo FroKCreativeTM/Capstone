@@ -73,35 +73,46 @@ const io = require('socket.io')(server);
 // 커넥션이 있을 때
 // 즉, 클리이언트(여기서는 모델)이 연결되어 있을 때, 이 함수를 처리힙니다.
 io.on('connection', function (socket) {
+	  socket.join("videos");
     socket.on('image_data', function (data) {
         // base64 형식을 가진 데이터를 가져옵니다.
         var frame = Buffer.from(data, 'base64').toString();
         // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
         io.emit('image', frame);
+        io.sockets.in("videos").emit('image_data', data);
     });
     socket.on('jsondata', function (data) {
-      // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
-      io.emit('jsonData', data);
-      console.log(data);
-  });
-  socket.on('pred_data', function (data) {
-    // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
-    const viol_pred = parseFloat(data.Violence_percent).toFixed(3);
-    const non_viol_pred = parseFloat(data.Non_Violence_percent).toFixed(3);
-
-    io.emit('viol_pred', viol_pred);
-    io.emit('non_viol_pred', non_viol_pred);
-
-    console.log(data);
-  });
+        // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
+        io.emit('jsonData', data);
+        console.log(data);
+    });
+    socket.on('frameTickCount', function (data) {
+        // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
+        io.emit('frameTickCount', data.tick);
+        console.log(data.tick);
+    });
+    socket.on('pred_data', function (data) {
+        // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
+        const viol_pred = parseFloat(data.Violence_percent).toFixed(3);
+        const non_viol_pred = parseFloat(data.Non_Violence_percent).toFixed(3);
+      
+        io.emit('viol_pred', viol_pred);
+        io.emit('non_viol_pred', non_viol_pred);
+      
+        console.log(data);
+    });
 });
 
 server.listen(app.get('port'), () => {
     // batch 파일
-    /*exec('CCTV.bat', function(err, data) {  
+    exec('CCTVStreamer.bat', function(err, data) {  
       console.log(err)
       console.log(data.toString());                       
-    });*/  
+    });  
+    exec('Predictor.bat', function(err, data) {  
+      console.log(err)
+      console.log(data.toString());                       
+    });  
 
     console.log(app.get('port'), '번 포트에서 대기 중');
 });

@@ -17,15 +17,15 @@ router.post('/register', isNotLoggedIn, async(req, res, next) =>{
         }
         const hash = await bcrypt.hash(password, 12);
         await User.create({
-        password:hash,
-        //password: req.body.inputPassword,
-        name: req.body.inputName,
-        usertype: req.body.inputUserType,
-        Dept: req.body.inputDept,
-        rank: req.body.inputRank,
-        tele: req.body.inputTele,
-        birth: req.body.inputBirth,
-        addr: req.body.inputAddr,
+            password:hash,
+            //password: req.body.inputPassword,
+            name: req.body.inputName,
+            usertype: req.body.inputUserType,
+            Dept: req.body.inputDept,
+            rank: req.body.inputRank,
+            tele: req.body.inputTele,
+            birth: req.body.inputBirth,
+            addr: req.body.inputAddr,
       });
       //console.log(user);
       //res.status(201).json(user);

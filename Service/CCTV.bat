@@ -1,1 +1,0 @@
-python ./aimodel/CCTV.py
