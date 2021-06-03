@@ -7,7 +7,7 @@
   </head>
     <body>
         <%- include("./partials/adminHeader.ejs") %>
-        <form id="register" name ="fo" method="get">
+        <!-- <form id="register" action="/adminProfile" name ="fo" method="POST">
             <fieldset>
                 <legend> 사용자  정보 수정 </legend>
                 <div class ="table_layout">
@@ -19,59 +19,186 @@
                             <col width="25%"/>
                         </colgroup>
                         <tbody>
+                            <%  for(let i = 0; i < bring.length; i++) { %>
                             <tr><th>ID</th>
-                                <td> <input type="text" name="id" maxlength="50" disabled></td>
-                                <td> *ID는 사번으로 자동 배정됩니다.</td>
+                                <td><%= bring[i].idusers %></td>
+                                <td></td>
                             </tr>
-        
-                            <tr>
-                                <th>*비밀번호</th> 
-                                <td><input type="password" size="20" placeholder="password" required></td>
-                                <th>*비밀번호 확인</th>
-                                <td><input type="password"placeholder="password" required></td>
-                            </tr>
-        
                             <tr>
                                 <th>*이름</th>
-                                <td><input type="text" size="20" placeholder="User Name" required disabled></td>
+                                <td> <input type="text" size="20" placeholder="<%= bring[i].name %>" required disabled></td>
                                 <th>전화번호</th>
-                                <td><input type="tel" placeholder="010-1234-5678"></td>
+                                <td> <input type="tel" name="tele" placeholder="<%= bring[i].tele %>"></td>
                             </tr>
                             <tr>
                                 <th>부서</th>
                                 <td>
-                                    <select name="department">
-                                    <datalist id="department">
-                                        <option value="1" selected>CCTV 사용자</option>
+                                    <select name="Dept">
+                                    <datalist id="Dept">
+                                        <option value="1" >CCTV 사용자</option>
                                         <option value="2" >CCTV 관리자</option>
                                         <option value="3" >데이터베이스 관리자</option>
                                     </datalist>
                                 </td>
-                                
                                 <th>직책</th>
-                                    <td>
-                                        <select name="position">
-                                        <datalist id="position" >
-                                            <option value="1" selected>부서장</option>
-                                            <option value="2">부서원 </option>
-                                        </datalist>
-                                    </td>
-                                </tr> 
+                                <td>
+                                    <select name="ranking">
+                                    <datalist id="ranking">
+                                        <option value="1" >부서장</option>
+                                        <option value="2" >부서원</option>
+                                    </datalist>
+                                </td>
+                            </tr> 
                                 <tr>
                                     <th>생일</th>
-                                    <td><input type="date" id='currentDate' required disabled></td>
-                                    <th>권한</th>
-                                    <td><input type="radio" name="authority" value="0">관리자
-                                    <input type="radio" name="authority" value="1" checked>사용자</td>
-                  
+                                    <td><input type="text" id='birth' placeholder="<%= bring[i].birth%>" required disabled></td>
                                 </tr>
-                                <td><input type="submit" value="확인"><input type="reset" value="초기화"><input type="button" value="취소" onclick="location.href='/?id=admin'"></td>
-                            </tr>
+                                <td><input type="submit" value="확인"><input type="reset" value="초기화"><input type="button" value="취소" ></td>
+                                <% } %>
                         </tbody>
                     </table>
                 </div>
-            </fieldset>
-        </form>
+            </fieldset> -->
+        
+        <form action="/adminProfile" name ="fo" method="POST">
+            <!-- content--> 
+            <div class="content">
+                <%  for(let i = 0; i < bring.length; i++) { %>
+            <!-- ID -->
+                <div>
+                    <h3 class="join_title">
+                        <label for="id">아이디</label>
+                    </h3>
+                    <span class="box int_id">
+                        <input type="text" id="id" class="int" maxlength="20" disabled placeholder="<%= bring[i].idusers %>">
+                    </span>
+                </div>
+
+            <!-- PW1 -->
+                <div>
+                    <h3 class="join_title"><label for="pswd1">비밀번호</label></h3>
+                    <span class="box int_pass">
+                        <input type="password" name="inputPassword" id="pswd1" class="int" maxlength="20">
+                        <span id="alertTxt">사용불가</span>
+                        <img src="../images/m_icon_pass.png" id="pswd1_img1" class="pswdImg">
+                    </span>
+                </div>
+
+            <!-- PW2 -->
+                <div>
+                    <h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
+                    <span class="box int_pass_check">
+                        <input type="password" id="pswd2" class="int" maxlength="20">
+                        <img src="../images/m_icon_check_disable.png" id="pswd2_img1" class="pswdImg">
+                    </span>
+                </div>
+
+        <!-- NAME -->
+            <div>
+                <h3 class="join_title"><label for="name" >이름</label></h3>
+                <span class="box int_name">
+                    <input type="text" name="inputName" id="name" class="int" maxlength="20" placeholder="<%= bring[i].tele %>" required disabled>
+                </span>
+            </div>
+
+        <!-- BIRTH -->
+            <div>
+                <h3 class="join_title"><label for="yy">생년월일</label></h3>
+
+                <div id="bir_wrap">
+                <!-- BIRTH_YY -->
+                    <div id="bir_yy">
+                        <span class="box"> 
+                            <input type="text" id="yy" class="int" maxlength="4" placeholder="년(4자)"> 
+                        </span> 
+                    </div>
+
+                <!-- BIRTH_MM -->
+                    <div id="bir_mm">
+                        <span class="box">
+                            <select id="mm" class="sel">
+                                <option>월</option>
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>                                    
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </span>
+                    </div>
+
+                <!-- BIRTH_DD -->
+                <div id="bir_dd">
+                    <span class="box">
+                        <input type="text" id="dd" class="int" maxlength="2" placeholder="일">
+                    </span>
+                </div>
+
+            </div>
+            <span class="error_next_box"></span>    
+        </div>
+
+        <!-- Dept -->
+        <div>
+            <h3 class="join_title"><label for="dept">부서</label></h3>
+            <span class="box Dept_code">
+                <select name="inputDept" class="sel">
+                    <option value="1">CCTV 사용자</option>
+                    <option value="2">CCTV 관리자</option>
+                    <option value="3">데이터베이스 관리자</option>
+                </select>                            
+            </span>
+        </div>
+
+        <!-- Position -->
+        <div>
+          <h3 class="join_title"><label for="rank">직책</label></h3>
+          <span class="box rank_code">
+              <select name="inputRank" class="sel">
+                  <option value="1">부서장</option>
+                  <option value="2">부서원</option>
+              </select>                            
+          </span>
+        </div>
+
+        <!-- MOBILE -->
+        <div>
+            <h3 class="join_title"><label for="phoneNo">휴대전화</label></h3>
+            <span class="box int_mobile">
+                <input type="tel" id="mobile" name="inputTele" class="int" maxlength="16"  placeholder="<%= bring[i].tele %>">
+            </span>
+            <span class="error_next_box"></span>    
+        </div>
+         <!-- Addr -->
+         <div>
+          <h3 class="join_title"><label for="addr">주소</label></h3>
+          <span class="box int_Addr">
+              <input type="text" id="mobile" name="inputAddr" class="int" maxlength="16" placeholder="<%= bring[i].addr %>">
+          </span>
+   
+        </div>
+
+
+        <!-- JOIN BTN-->
+        <div class="btn_area">
+            <button type="submit" class="btnJoin">
+                <span>수정하기</span>
+            </button>
+        </div>
+
+        
+      </form>
+    </div>
+    <% } %> 
+    <!-- content-->
         <%- include("./partials/footer.ejs") %> 
     </body>
+</form>
 </html>

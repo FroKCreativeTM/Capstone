@@ -7,7 +7,7 @@
     </head>
     <body>
       <%- include("./partials/adminHeader.ejs") %>
-      <form id="register" action="/auth/register" name ="fo" method="POST">
+      <!-- <form id="register" action="/auth/register" name ="fo" method="POST">
         <fieldset>
           <legend> 사용자 등록 </legend>
           <div class ="table_layout">
@@ -19,15 +19,15 @@
                 <col width="25%"/>
               </colgroup>
               <tbody>
-                <tr>
+                <tr class="idregister">
                   <th>ID</th>
-                  <td> <input type="text" name="id" maxlength="50" disabled></td>
+                  <td> <input class="idform" type="text" name="id" maxlength="50" disabled></td>
                   <td> *ID는 사번으로 자동 배정됩니다.</td>
                 </tr>
-                <tr>
-                  <th>비밀번호</th> 
+                <tr class="pwregister">
+                  <th class="pw1">비밀번호</th> 
                   <td><input type="password" size="20" name="inputPassword" placeholder="비밀번호를 입력하세요" required></td>
-                  <th>비밀번호 확인</th>
+                  <th class="pw2">비밀번호 확인</th>
                   <td><input type="password" placeholder="비밀번호 확인" required></td>
                 </tr>
                 <tr>
@@ -63,16 +63,153 @@
                 <tr>
                   <th>생일</th>
                     <td><input type="date" name='inputBirth' required></td>
-                    <th>권한</th>
-                    <td><input type="radio" name="inputUserType" value="0">관리자
-                    <input type="radio" name="inputUserType" value="1" checked>사용자</td>                 
-                </tr>
                 <td><input type="submit" value="확인"><input type="reset" value="초기화"><input type="button" value="취소" onclick="location.href='/admin'"></td>  
               </tbody>
             </table>
           </div>
         </fieldset>
+      </form> -->
+
+      <!-- content-->
+      <div class="content">
+        <form action="/auth/register" name ="fo" method="POST">
+
+        <!-- ID -->
+        <div>
+            <h3 class="join_title">
+                <label for="id">아이디</label>
+            </h3>
+            <span class="box int_id">
+                <input type="text" id="id" class="int" maxlength="20" disabled placeholder="아이디는 사번으로 자동 배정됩니다">
+            </span>
+            <span class="error_next_box"></span>
+        </div>
+
+        <!-- PW1 -->
+        <div>
+            <h3 class="join_title"><label for="pswd1">비밀번호</label></h3>
+            <span class="box int_pass">
+                <input type="password" name="inputPassword" id="pswd1" class="int" maxlength="20">
+            </span>
+            <span class="error_next_box"></span>
+        </div>
+
+        <!-- PW2 -->
+        <div>
+            <h3 class="join_title"><label for="pswd2">비밀번호 재확인</label></h3>
+            <span class="box int_pass_check">
+                <input type="password" id="pswd2" class="int" maxlength="20">
+            </span>
+            <span class="error_next_box"></span>
+        </div>
+
+        <!-- NAME -->
+        <div>
+            <h3 class="join_title"><label for="name">이름</label></h3>
+            <span class="box int_name">
+                <input type="text" name="inputName" id="name" class="int" maxlength="20">
+            </span>
+            <span class="error_next_box"></span>
+        </div>
+
+        <!-- BIRTH -->
+        <div>
+            <h3 class="join_title"><label for="yy">생년월일</label></h3>
+
+            <div id="bir_wrap">
+                <!-- BIRTH_YY -->
+                
+                <div id="bir_yy">
+                  <span class="box"> 
+                    <input type="text" id="yy" class="int" maxlength="4" placeholder="년(4자)"> 
+                  </span> 
+                </div>
+
+                <!-- BIRTH_MM -->
+                <div id="bir_mm">
+                    <span class="box">
+                        <select id="mm" class="sel">
+                            <option>월</option>
+                            <option value="01">1</option>
+                            <option value="02">2</option>
+                            <option value="03">3</option>
+                            <option value="04">4</option>
+                            <option value="05">5</option>
+                            <option value="06">6</option>
+                            <option value="07">7</option>
+                            <option value="08">8</option>
+                            <option value="09">9</option>                                    
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                    </span>
+                </div>
+
+                <!-- BIRTH_DD -->
+                <div id="bir_dd">
+                    <span class="box">
+                        <input type="text" id="dd" class="int" maxlength="2" placeholder="일">
+                    </span>
+                </div>
+
+            </div>
+            <span class="error_next_box"></span>    
+        </div>
+
+        <!-- Dept -->
+        <div>
+            <h3 class="join_title"><label for="dept">부서</label></h3>
+            <span class="box Dept_code">
+                <select name="inputDept" class="sel">
+                    <option value="1">CCTV 사용자</option>
+                    <option value="2">CCTV 관리자</option>
+                    <option value="3">데이터베이스 관리자</option>
+                </select>                            
+            </span>
+            <span class="error_next_box">필수 정보입니다.</span>
+        </div>
+
+        <!-- Position -->
+        <div>
+          <h3 class="join_title"><label for="rank">직책</label></h3>
+          <span class="box rank_code">
+              <select name="inputRank" class="sel">
+                  <option value="1">부서장</option>
+                  <option value="2">부서원</option>
+              </select>                            
+          </span>
+        </div>
+
+        <!-- MOBILE -->
+        <div>
+            <h3 class="join_title"><label for="phoneNo">휴대전화</label></h3>
+            <span class="box int_mobile">
+                <input type="tel" id="mobile" name="inputTele" class="int" maxlength="16" placeholder="01012345678">
+            </span>
+            <span class="error_next_box"></span>    
+        </div>
+         <!-- Addr -->
+         <div>
+          <h3 class="join_title"><label for="addr">주소</label></h3>
+          <span class="box int_Addr">
+              <input type="text" id="mobile" name="inputAddr" class="int" maxlength="16" placeholder="주소">
+          </span>
+   
+        </div>
+
+
+        <!-- JOIN BTN-->
+        <div class="btn_area">
+            <button type="submit" class="btnJoin">
+                <span>가입하기</span>
+            </button>
+        </div>
+
+        
       </form>
+    </div> 
+    <!-- content-->
       <%- include("./partials/footer.ejs") %> 
     </body>
 </html>

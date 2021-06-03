@@ -7,42 +7,47 @@
   </head>
     <body>
         <%- include("./partials/adminHeader.ejs") %>
-        <div id ="table_layout">
-            <form>            
+            <form id="DelUser" action="/DelUser" method="POST">            
                 <table id="user-list" border="0">
                 <thead>
                     <tr>
-                        <th>id(사번)</th>
-                        <th>이름</th>
-                        <th>부서</th> 
-                        <th>직책</th>
-                        <th>번호</th>
+                        <th> 선택 </th>
+                        <th> 사번 </th>
+                        <th> 이름 </th>
+                        <th> 부서 </th> 
+                        <th> 직책 </th>
+                        <th> 번호 </th>
                         <th>생년월일</th>
-                        <th>주소</th> 
+                        <th> 주소 </th> 
                     </tr>
                 </thead>
                 <tbody>
-                    {% for user in users %}
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>{{user.idusers}}</td>
-                        <td>{{user.name}}</td>
-                        <td>{{user.Dept}}</td>
-                        <td>{{user.rank}}</td>
-                        <td>{{user.tele}}</td>
-                        <td>{{user.birth}}</td>
-                        <td>{{user.addr}}</td>                    
-                    </tr>
-                    <td><input type="submit" value="삭제"></input></td>
-                    <td><input type="reset" value="초기화"></input></td>
-                    <td><button value="취소" onclick="location.href='/admin'"></button></td>
-                    {% endfor %}
-                </tbody>
+                    <%  for(let i = 0; i < users.length; i++) {
+                        var id=users[i].idusers %>
+                        <tr> 
+                            <td><input type="checkbox" value="<%= id %>" name="id"></td>
+                            <td><%= users[i].idusers %></td>
+                            <td><%= users[i].name %></td>
+                            <td><%= users[i].Dept %></td>
+                            <td><%= users[i].ranking %></td>
+                            <td><%= users[i].tele %></td>
+                            <td><%= users[i].birth %></td>
+                            <td><%= users[i].addr %></td>    
+
+                        </tr>
+                        <% } %>             
+                </tbody>             
             </table>
+            <br>
+            <input class="btnJoin" id="delBtn" type="submit" value="삭제"></input>
+            <br>
+            <br>
+            <br>
+          
+            <input class="btnJoin" id="resetBtn" type="reset" value="초기화"></input>
             <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-            <script src="/usercheck.js"></script>
             </form>
-        </div>
+
         <%- include("./partials/footer.ejs") %> 
     </body>
 </html>

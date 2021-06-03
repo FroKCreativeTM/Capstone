@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <title>CCTV Service</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+    <body>
+        <%- include("./partials/adminHeader.ejs") %>
+            <form id="video_crime" action="/video_crime" method="POST">            
+                <table id="user-list" border="0">
+                <thead>
+                    <tr>
+                        <th> num </th>
+                        <th> id </th>
+                        <th> 이름 </th>
+                        <th> start time </th> 
+                        <th> end time </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%  for(let i = 0; i < crime.length; i++) {%>
+                        <tr> 
+                            <td><%= crime[i].idcrime %></td>
+                            <td><%= crime[i].check %></td>
+                            <td><%= crime[i].idvideo %></td>
+                            <td><%= crime[i].fi_percent %></td>
+                            <td><%= crime[i].non_percent %></td>   
+                        </tr>
+                        <% } %>             
+                </tbody>             
+            </table>
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            </form>
+
+        <%- include("./partials/footer.ejs") %> 
+    </body>
+</html>

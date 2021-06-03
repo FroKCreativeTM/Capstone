@@ -14,7 +14,7 @@
     </head>
     <body onload="time()">
         <%- include("./partials/adminHeader.ejs") %>
-        <img id="image" width="640" height="480">
+        <img id="image"  width="1080" height="720">
             <script src="/socket.io/socket.io.js"></script>
             <script>
                 const socket = io.connect('http://localhost:8001/', { transports: ['websocket'] });
@@ -53,9 +53,6 @@
                     </script>
                 </tr>
             </table>
-<<<<<<< HEAD
-=======
             <%- include("./partials/footer.ejs") %> 
->>>>>>> f2f9a69cc71d8439f6304a462bfc1e81c6bc8846
     </body>
 </html>

@@ -10,10 +10,12 @@
   "author": "전남대학교 캡스톤디자인 22번팀",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "child_process": "^1.0.2",
     "cookie-parser": "^1.4.5",
-    "dotenv": "^9.0.0",
+    "dotenv": "^9.0.2",
     "ejs": "^3.1.6",
     "ejs-mate": "^3.0.0",
     "express": "^4.17.1",

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <title>CCTV Service</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+    <body>
+        <%- include("./partials/adminHeader.ejs") %>
+            <form id="video_past" action="/video_past" method="POST">            
+                <table id="user-list" border="0">
+                <thead>
+                    <tr>
+                        <th> num </th>
+                        <th> id </th>
+                        <th> 이름 </th>
+                        <th> start time </th> 
+                        <th> end time </th>
+                        <th> fi_count </th>
+                        <th> non_count </th>
+                        <th> video date </th> 
+                        <th> video place </th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <%  for(let i = 0; i < video.length; i++) {%>
+                        <tr> 
+                            <td><%= i %></td>
+                            <td><a href="file:///<%= video[i].locations %>">test</a></td>
+                            <td><%= video[i].locations %></td>
+                            <td><%= video[i].starttime %></td>
+                            <td><%= video[i].endtime %></td>
+                            <td><%= video[i].fi_count %></td>
+                            <td><%= video[i].non_count %></td>
+                            <td><%= video[i].date %></td>    
+                            <td><%= video[i].place %></td>    
+                        </tr>
+                        <% } %>             
+                </tbody>             
+            </table>
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            </form>
+
+        <%- include("./partials/footer.ejs") %> 
+    </body>
+</html>

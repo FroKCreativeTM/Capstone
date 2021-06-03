@@ -19,7 +19,7 @@ async function getUser() {
         td.textContent = user.Dept;
         row.appendChild(td);
         td = document.createElement('td');
-        td.textContent = user.rank;
+        td.textContent = user.ranking;
         row.appendChild(td);
         td = document.createElement('td');
         td.textContent = user.tele;

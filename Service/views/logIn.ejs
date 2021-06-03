@@ -7,22 +7,13 @@
   </head>
   <body>
     <%- include("./partials/loginHeader.ejs") %>
-    <div  class="svg-div" onclick="location.href='/login'"><%- include ("./images/cctv-svgrepo-com.svg") %></div>
-    
     
     <section class="login-input-section-wrap">
       <form action="/auth/login" id="Login" name="fo" method="POST">
+        <div  class="svg-div" onclick="location.href='/login'"><%- include ("./images/cctv-svgrepo-com.svg") %></div>
         <div class="login-input-wrap"><input type="text" size="15" class="login-input" name="idusers" placeholder="아이디"></div>
         <div class="login-input-wrap password-wrap"><input type="password" calss="password-input" size="15" name="password" placeholder="비밀번호"></div>
         <div class="login-button-wrap"><input type="submit" value="Login"></div>
-        <div class="login-auth">
-          <label>
-            <input class="hide" type="radio" name="usertype" value="0" checked>관리자
-          </label>
-          <label>
-            <input class="hide" type="radio" name="usertype" value="1">사용자
-          </label>
-        </div>
       </form>
     </section>
     <%- include("./partials/footer.ejs") %> 
