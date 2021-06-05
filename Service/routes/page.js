@@ -6,7 +6,7 @@ const User = require('../models/user');
 var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : '',
+    password : 'keAarwrm76*',
     database : 'capstone',
     port:'3306'
   });
@@ -34,44 +34,18 @@ router.get('/userProfile',isLoggedIn,(req,res)=>{
 router.post('/userProfile',isLoggedIn,function(req,res,next){
     var iduser=req.user.idusers;
     var addr=req.user.addr;
-    //var password = req.user.password
-    // var Dept=req.body.Dept;
-    // var ranking=req.body.ranking;
     var tele=req.body.tele;
-
-    // const hash = bcrypt.hash(password, 12);
-    // console.log(hash);
-    // connection.query('UPDATE users SET password=? WHERE idusers=?',
-    // [ hash, iduser ],function(err,result){
-    //     if(err){
-    //         console.log(err);
-    //     }
-    //     else{
-    //         //res.render('adminProfile',{bring:result});
-    //         //res.render('admin');
-      
-    //     }
-    // });
     
     connection.query('UPDATE users SET tele=? WHERE idusers=?',
     [ tele, iduser ],function(err,result){
         if(err){
             console.log(err);
         }
-        else{
-            //res.render('adminProfile',{bring:result});
-            //res.render('admin');
-        }
     });
     connection.query('UPDATE users SET addr=? WHERE idusers=?',
     [ addr, iduser ],function(err,result){
         if(err){
             console.log(err);
-        }
-        else{
-             
-           // res.render('adminProfile',{bring:result});
-           //res.render('admin');
         }
     });
     res.render('umain');
@@ -102,20 +76,11 @@ router.post('/adminProfile',isLoggedIn,function(req,res,next){
         if(err){
             console.log(err);
         }
-        else{
-            //res.render('adminProfile',{bring:result});
-            //res.render('admin');
-        }
     });
     connection.query('UPDATE users SET ranking=? WHERE idusers=?',
     [ ranking, iduser ],function(err,result){
         if(err){
             console.log(err);
-        }
-        else{
-             
-           // res.render('adminProfile',{bring:result});
-           //res.render('admin');
         }
     });
     connection.query('UPDATE users SET Dept=? WHERE idusers=?',
@@ -123,15 +88,11 @@ router.post('/adminProfile',isLoggedIn,function(req,res,next){
         if(err){
             console.log(err);
         }
-        else{
-           // res.render('adminProfile',{bring:result});
-          // res.render('admin');
-        }
     });
     res.render('admin');
 });
 
-router.get('/register',  (req, res) =>{
+router.get('/register', isNotLoggedIn,  (req, res) =>{
     res.render('register');
 });
 
@@ -148,7 +109,6 @@ router.get('/umain', isLoggedIn, (req,res)=>{
 });
 
 router.get('/DelUser',isNotLoggedIn,(req,res)=>{
-    // res.render('DelUser');
     connection.query('SELECT * FROM users', function(err, result) {
         if(err){
             console.error(err);
@@ -159,7 +119,6 @@ router.get('/DelUser',isNotLoggedIn,(req,res)=>{
     });
 });
 router.post('/DelUser',isNotLoggedIn,(req,res,next)=>{
-    // res.render('DelUser');
     var id=req.body.id;
     console.log(id);
     connection.query('DELETE FROM users WHERE idusers=?',[id], function(err, result) {

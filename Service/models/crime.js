@@ -1,6 +1,6 @@
 const Sequelize=require('sequelize');
 
-module.exports=class User extends Sequelize.Model{
+module.exports=class crime extends Sequelize.Model{
     static init(sequelize){
         return super.init({
             idcrime :{
@@ -8,8 +8,12 @@ module.exports=class User extends Sequelize.Model{
                 autoIncrement: true,
                 primaryKey: true
             },
-           check:{
-                type:Sequelize.BOOLEAN,
+            locations:{
+                type:Sequelize.STRING(300),
+                allowNull:false
+            },
+            pred_type:{
+                type:Sequelize.STRING(15),
                 allowNull:false
             },
             fi_percent:{
@@ -31,5 +35,8 @@ module.exports=class User extends Sequelize.Model{
               charset: 'utf8',
               collate: 'utf8_general_ci',
             });
-    } static associate(db){}
+    } 
+static associate(db) {
+        db.crime.belongsTo(db.video, { foreignKey: "locations", targetKey: "locations" });
+      }
 };

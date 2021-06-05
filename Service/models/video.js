@@ -1,6 +1,6 @@
 const Sequelize=require('sequelize');
 
-module.exports=class User extends Sequelize.Model{
+module.exports=class Vidio extends Sequelize.Model{
     static init(sequelize){
         return super.init({
             idvideo :{
@@ -8,17 +8,16 @@ module.exports=class User extends Sequelize.Model{
                 autoIncrement: true,
                 primaryKey: true
             },
-           locations:{
+            locations:{
                 type:Sequelize.STRING(300),
+                unique : true,
                 allowNull:false
             },
             starttime:{
-                type:Sequelize.STRING(45),
-                allowNull:false
+                type:Sequelize.STRING(45)
             },
             endtime:{
-                type:Sequelize.STRING(45),
-                allowNull:false
+                type:Sequelize.STRING(45)
             },
             fi_count:{
                 type:Sequelize.INTEGER,
@@ -29,8 +28,7 @@ module.exports=class User extends Sequelize.Model{
                 allowNull:false
             },
             videodate:{
-                type:Sequelize.STRING(45),
-                allowNull:false
+                type:Sequelize.STRING(45)
             },
             videoplace:{
                 type:Sequelize.STRING(45),
@@ -47,5 +45,8 @@ module.exports=class User extends Sequelize.Model{
               charset: 'utf8',
               collate: 'utf8_general_ci',
             });
-    } static associate(db){}
+    } 
+    static associate(db) {
+        db.video.hasMany(db.crime, { foreignKey: "locations", sourceKey: "locations" });
+      }
 };

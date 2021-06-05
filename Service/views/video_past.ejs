@@ -13,21 +13,19 @@
                     <tr>
                         <th> num </th>
                         <th> id </th>
-                        <th> 이름 </th>
-                        <th> start time </th> 
-                        <th> end time </th>
-                        <th> fi_count </th>
-                        <th> non_count </th>
-                        <th> video date </th> 
-                        <th> video place </th> 
+                        <th> 영상 시작 시간 </th> 
+                        <th> 영상 끝 시간 </th>
+                        <th> 폭력 개수 </th>
+                        <th> 비폭력 개수 </th>
+                        <th> 영상 일자 </th> 
+                        <th> 영상 장소 </th> 
                     </tr>
                 </thead>
                 <tbody>
                     <%  for(let i = 0; i < video.length; i++) {%>
                         <tr> 
                             <td><%= i %></td>
-                            <td><a href="file:///<%= video[i].locations %>">test</a></td>
-                            <td><%= video[i].locations %></td>
+                            <td><a href="file:///<%= video[i].locations %>"><%= video[i].idvideo %></a></td>
                             <td><%= video[i].starttime %></td>
                             <td><%= video[i].endtime %></td>
                             <td><%= video[i].fi_count %></td>

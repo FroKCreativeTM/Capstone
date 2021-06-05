@@ -105,6 +105,7 @@ while True :
      # np.array로 만들기 위한 임시 공간
     res_list = []
     
+    #if type(imdata) is np.ndarray :
     if isinstance(imdata, np.ndarray) :
         RGB_img = cv2.cvtColor(imdata, cv2.COLOR_BGR2RGB)
         res = cv2.resize(RGB_img, dsize=(img_size, img_size), interpolation=cv2.INTER_CUBIC)
@@ -144,7 +145,9 @@ while True :
                     "pred_type": 'Non-Violence', \
                     "time" : datetime.now().strftime('%Y-%m-%d-%H-%M-%S'),\
                     "Violence_percent" : (total_fi * 100) / pred_image_cnt, \
-                    "Non_Violence_percent" : (total_no * 100) / pred_image_cnt
+                    "Non_Violence_percent" : (total_no * 100) / pred_image_cnt ,\
+                    "fi_count" : fi_count , \
+                    "no_count" : no_count 
                     }
                 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}                
                 sio.emit('pred_data', json_data)
@@ -157,7 +160,9 @@ while True :
                     "pred_type": 'Violence', \
                     "time" : datetime.now().strftime('%Y-%m-%d-%H-%M-%S'),\
                     "Violence_percent" : (total_fi * 100) / pred_image_cnt, \
-                    "Non_Violence_percent" : (total_no * 100) / pred_image_cnt
+                    "Non_Violence_percent" : (total_no * 100) / pred_image_cnt , \
+                    "fi_count" : fi_count , \
+                    "no_count" : no_count 
                     }
                 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}                
                 sio.emit('pred_data', json_data)

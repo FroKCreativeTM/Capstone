@@ -15,6 +15,9 @@ const { sequelize } = require('./models');
 const exec = require('child_process').execFile;
 const { use } = require('./routes/page');
 
+const video = require('./models/video');
+const crime = require('./models/crime');
+
 const app = express();
 passportConfig();//패스포트 설정
 
@@ -68,6 +71,9 @@ app.use((err, req, res, next) =>{
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
+// 비디오 경로 주소를 받을 변수입니다.
+let location = '';
+
 // 커넥션이 있을 때
 // 즉, 클리이언트(여기서는 모델)이 연결되어 있을 때, 이 함수를 처리힙니다.
 io.on('connection', function (socket) {
@@ -90,6 +96,30 @@ io.on('connection', function (socket) {
       // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
       io.emit('jsonData', data);
       console.log(data);
+      async function change_video(){
+        await video.update({
+          starttime : data.start_time,
+          endtime : data.end_time,
+          fi_count : data.fi_count,
+          non_count : data.no_count,
+          videodate : data.start_time
+        }
+          ,{where: {locations : location}});
+      }
+      change_video();
+      /*async function put_video(){
+        await crime.create({
+          idvideo : '',
+          locations : location,
+          starttime : '0',
+          endtime : '0',
+          fi_count : '0',
+          non_count : '0',
+          videodate : '0',
+          videoplace : "home"
+        });
+      }
+      put_video();*/
   });
   socket.on('frameTickCount', function (data) {
       // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
@@ -98,8 +128,20 @@ io.on('connection', function (socket) {
   });
   socket.on('get_filename', function (data) {
       // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
+      location = data;
       io.emit('get_filename', data);
-      console.log('get_filename : ' + data);
+      console.log('get_filename : ' + location);
+      async function put_video(){
+        await video.create({
+          idvideo : '',
+          locations : location,
+          fi_count : '0',
+          non_count : '0',
+          videoplace : "home"
+        });
+      }
+      put_video();
+
   });
   socket.on('pred_data', function (data) {
       // {
@@ -112,15 +154,31 @@ io.on('connection', function (socket) {
       // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
       const viol_pred = parseFloat(data.Violence_percent).toFixed(3);
       const non_viol_pred = parseFloat(data.Non_Violence_percent).toFixed(3);
-
-      if(viol_pred > non_viol_pred) {
-        alert('폭력 의심 상황입니다.');
-      }
     
       io.emit('viol_pred', viol_pred);
       io.emit('non_viol_pred', non_viol_pred);
-    
+  
       console.log(data);
+      async function put_crime(){
+        await crime.create({
+          idcrime : '',
+          locations : location,
+          pred_type : data.pred_type,
+          fi_percent : viol_pred,
+          non_percent : non_viol_pred,
+        });
+      }
+      put_crime();
+
+      async function change_video(){
+        await video.update({
+          endtime : data.time,
+          fi_count : data.fi_count,
+          non_count : data.no_count,
+        }
+          ,{where: {locations : location}});
+      }
+      change_video();
   });
 });
 
@@ -130,7 +188,7 @@ server.listen(app.get('port'), () => {
        console.log(err);
        console.log(data.toString());                       
      });  
-     exec('prediction.bat', function(err, data) {  
+    exec('prediction.bat', function(err, data) {  
        console.log(err);
        console.log(data.toString());                       
      });  

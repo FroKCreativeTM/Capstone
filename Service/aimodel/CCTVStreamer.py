@@ -21,7 +21,7 @@ def video_play() :
     now = datetime.now()
     
     # 비디오를 현재 장치로 불러오고, 이 비디오에 대한 설정을 한다.
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture('C:/Users/user/OneDrive - Chonnam National University/CSE/CapstoneDesign/movie/test/01.mp4')
     vid_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     vid_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
@@ -62,10 +62,6 @@ def video_play() :
         if ret == True : 
             cv2.putText(frame, text=time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time())), \
                 org=(30, 400), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(0,255,0), thickness=2)
-            cv2.putText(frame, text= 'no : {}'.format(avg_no), \
-                org=(30, 300), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(0,255,0), thickness=2)
-            cv2.putText(frame, text= 'fi : {}'.format(avg_fi), \
-                org=(30, 350), fontFace=cv2.FONT_HERSHEY_SIMPLEX, fontScale=1, color=(0,255,0), thickness=2)
             out.write(frame)
             
             # 미리 설정된 인코드에 따라서 현재 화면을 jpg로 변환한다.
@@ -75,7 +71,7 @@ def video_play() :
             # 이 데이터를 data 태그를 붙이고, 소켓으로 NodeJS 서버에 보낸다.
             sio.emit('image_data', b64data)
 
-        if cv2.waitKey(int(1000 / fps)) == 27:         # wait for ESC key to exit
+        if cv2.waitKey() == 27:         # wait for ESC key to exit
             sio.emit('exit', {'exit' : 'exit'})
             # 녹화 중지
             out.release()

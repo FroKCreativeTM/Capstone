@@ -23,7 +23,7 @@ body{
 header{
    border-top: solid 2px black;
    background: var(--color-beige);
-   position: fixed;
+   position: relative;
    top:0;
    width: 100%;
    display: flex;

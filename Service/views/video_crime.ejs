@@ -11,19 +11,19 @@
                 <table id="user-list" border="0">
                 <thead>
                     <tr>
-                        <th> num </th>
                         <th> id </th>
-                        <th> 이름 </th>
-                        <th> start time </th> 
-                        <th> end time </th>
+                        <th> 영상 이름 </th>
+                        <th> 행동 유형 </th>
+                        <th> 폭력 확률 </th> 
+                        <th> 비폭력 확률 </th>
                     </tr>
                 </thead>
                 <tbody>
                     <%  for(let i = 0; i < crime.length; i++) {%>
                         <tr> 
                             <td><%= crime[i].idcrime %></td>
-                            <td><%= crime[i].check %></td>
-                            <td><%= crime[i].idvideo %></td>
+                            <td><%= crime[i].locations %></td>
+                            <td><%= crime[i].pred_type %></td>
                             <td><%= crime[i].fi_percent %></td>
                             <td><%= crime[i].non_percent %></td>   
                         </tr>
