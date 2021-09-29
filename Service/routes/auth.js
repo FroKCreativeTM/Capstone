@@ -10,7 +10,7 @@ const User = require('../models/user');
 var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : 'keAarwrm76*',
+    password : '',
     database : 'capstone',
     port:'3306'
   });
