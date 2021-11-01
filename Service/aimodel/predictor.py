@@ -42,7 +42,7 @@ img_size = 224
 
 fi_count = 0
 no_count = 0
-pred_image_cnt = 10
+pred_image_cnt = 100
 count = 0
 pred_images = []
 
