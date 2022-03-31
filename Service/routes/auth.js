@@ -10,7 +10,7 @@ const User = require('../models/user');
 var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
-    password : 'keAarwrm76*',
+    password : '',
     database : 'capstone',
     port:'3306'
   });
@@ -26,14 +26,13 @@ router.post('/register', isNotLoggedIn, async(req, res, next) =>{
         }
         const hash = await bcrypt.hash(password, 12);
         await User.create({
-        password:hash,
-        name: req.body.inputName,
-        Dept: req.body.inputDept,
-        ranking: req.body.inputRank,
-        tele: req.body.inputTele,
-        // birth: req.body.inputBirth,
-        addr: req.body.inputAddr,
-      });
+            password:hash,
+            name: req.body.inputName,
+            Dept: req.body.inputDept,
+            ranking: req.body.inputRank,
+            tele: req.body.inputTele,
+            addr: req.body.inputAddr,
+        });
       return res.redirect('/');
     } catch (err) {
       console.error(err);
@@ -60,11 +59,22 @@ router.post('/login', isNotLoggedIn, (req, res, next)=>{
                 console.error(loginError);
                 return next(loginError);
             }
-            if(req.body.Dept===1){
-                return res.redirect('/umain');  
-            }else{
-                return res.redirect('/admin'); 
-            }
+            try{
+                User.findOne({where: { idusers: req.body.idusers } })
+                .then((user) => {
+                    console.log(user.ranking);
+                    if(user.ranking == 2){
+                        return res.redirect('/umain');  
+                    }
+                    return res.redirect('/admin'); 
+                })
+                .catch((err) => {
+                    console.error(err);
+                })
+            } catch (err) {
+              console.error(err);
+              next(err);
+            }          
         });
     })(req, res, next);//미들웨어 내의 미들웨어에는 (req, res, next)를 붙인다.
 })

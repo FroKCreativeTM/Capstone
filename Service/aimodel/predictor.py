@@ -42,7 +42,7 @@ img_size = 224
 
 fi_count = 0
 no_count = 0
-pred_image_cnt = 10
+pred_image_cnt = 100
 count = 0
 pred_images = []
 
@@ -51,6 +51,7 @@ now = datetime.now()
 imdata = None
 tick = False
 filename = ''
+start_time = ''
 
 ################################################################################################
 
@@ -73,9 +74,14 @@ def exit(data) :
     exit()
 
 @sio.event 
-def get_filename(data) : 
+def location(data) : 
     global filename
     filename = data
+
+@sio.event 
+def start_time(data) : 
+    global start_time
+    start_time = data
 
 # loop IP : 
 sio.connect('http://localhost:8001/')
@@ -89,7 +95,7 @@ while True :
         # 비디오 관련 데이터(클립X)
         json_data = {\
             'filename' : filename, \
-            'start_time' : now.strftime('%Y-%m-%d-%H-%M-%S'), \
+            'start_time' : start_time, \
             'end_time' : datetime.now().strftime('%Y-%m-%d-%H-%M-%S'),\
             'fi_count' : fi_count, \
             'no_count' : no_count}
@@ -114,16 +120,16 @@ while True :
         resul = np.array(res_list)
         resul = (resul / 255.).astype(np.float16)
         resul = (resul*255).astype('uint8')
-        # 10장 * flatten 4096 data
+        # 100장 * flatten 4096 data
         # LSTM에 넣기 위한 데이터로 변환한다.
         pred_data = image_model_transfer.predict(resul)
         
         # 이미지를 배열에 넣어준다.
-        # 이 이미지가 10장이 쌓이면 LSTM으로 넘어간다.
+        # 이 이미지가 100장이 쌓이면 LSTM으로 넘어간다.
         pred_images.append(pred_data)
         count += 1
 
-        # 10프레임마다 lstm 훈련을 실시한다.
+        # 100프레임마다 lstm 훈련을 실시한다.
         if count == pred_image_cnt : 
             # 2개의 값으로 구성된 배열이 나올 것
             # 0 : fight rate
@@ -170,7 +176,7 @@ while True :
             
             # 리스트를 비우지 않으면, 계속 데이터가 남는다.
             pred_images = []
-            final_data = np.empty(shape=(10,), dtype=np.int8)    
+            final_data = np.empty(shape=(100,), dtype=np.int8)    
             count = 0
     else : 
         pass

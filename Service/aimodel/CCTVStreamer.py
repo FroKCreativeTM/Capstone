@@ -21,17 +21,21 @@ def video_play() :
     now = datetime.now()
     
     # 비디오를 현재 장치로 불러오고, 이 비디오에 대한 설정을 한다.
-    cap = cv2.VideoCapture('C:/Users/user/OneDrive - Chonnam National University/CSE/CapstoneDesign/movie/test/01.mp4')
+    cap = cv2.VideoCapture(0)
     vid_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     vid_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
 
     # 파일과 코덱 설정한 뒤 비디오라이터를 생성해서, 나갈 파일을 생성한다.
-    #filename = "./aimodel/movie/" + now.strftime("%Y") + "_" +     now.strftime("%m") + "_" + now.strftime("%d") + "_" + now.strftime("%H") + "_" + now.strftime("%M") + "_" + now.strftime("%S") + ".avi"
     filename = os.getcwd() + "/aimodel/movie/" + now.strftime("%Y") +\
          "_" + now.strftime("%m") + "_" + now.strftime("%d") + "_" \
              + now.strftime("%H") + "_" + now.strftime("%M") + "_" + now.strftime("%S") + ".avi"
-    sio.emit('get_filename', filename)
+    file_data = {
+        'filename' : filename, \
+        'start_time' : now.strftime('%Y-%m-%d-%H-%M-%S'),
+        }
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}     
+    sio.emit('get_filename', file_data)
 
     # 녹화 영상에 대한 세팅
     out = cv2.VideoWriter(filename, fourcc, cap.get(cv2.CAP_PROP_FPS), (vid_width, vid_height))
@@ -48,12 +52,16 @@ def video_play() :
             #저장 파일 종료
             out.release()
             now = datetime.now()
-            #frameCounter = 0
 
             filename = os.getcwd() + "/aimodel/movie/" + now.strftime("%Y") +\
                 "_" + now.strftime("%m") + "_" + now.strftime("%d") + "_" \
                 + now.strftime("%H") + "_" + now.strftime("%M") + "_" + now.strftime("%S") + ".avi"
-            sio.emit('get_filename', filename)
+            file_data = {
+                'filename' : filename, \
+                'start_time' : now.strftime('%Y-%m-%d-%H-%M-%S'),
+                }
+            headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}     
+            sio.emit('get_filename', file_data)
             out = cv2.VideoWriter(filename, fourcc, cap.get(cv2.CAP_PROP_FPS), (vid_width, vid_height))
 
         # 프레임과 이와 관련된 정보를 리턴 받는다.

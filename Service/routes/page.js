@@ -100,13 +100,14 @@ router.get('/', isNotLoggedIn,(req,res,next)=>{
     res.render('login');
 });
 
+router.get('/umain', isLoggedIn, (req,res)=>{
+    res.render('umain');
+});
+
 router.get('/admin', isLoggedIn, (req,res)=>{
     res.render('admin');
 });
 
-router.get('/umain', isLoggedIn, (req,res)=>{
-    res.render('umain');
-});
 
 router.get('/DelUser',isNotLoggedIn,(req,res)=>{
     connection.query('SELECT * FROM users', function(err, result) {

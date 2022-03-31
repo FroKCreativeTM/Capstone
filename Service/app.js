@@ -107,19 +107,6 @@ io.on('connection', function (socket) {
           ,{where: {locations : location}});
       }
       change_video();
-      /*async function put_video(){
-        await crime.create({
-          idvideo : '',
-          locations : location,
-          starttime : '0',
-          endtime : '0',
-          fi_count : '0',
-          non_count : '0',
-          videodate : '0',
-          videoplace : "home"
-        });
-      }
-      put_video();*/
   });
   socket.on('frameTickCount', function (data) {
       // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
@@ -128,13 +115,16 @@ io.on('connection', function (socket) {
   });
   socket.on('get_filename', function (data) {
       // 이 받은 데이터를 image라는 태그를 가진 데이터로써 웹 페이지에 뿌립니다.
-      location = data;
-      io.emit('get_filename', data);
-      console.log('get_filename : ' + location);
+      location = data.filename;
+      start_time = data.start_time;
+      io.emit('location', location);
+      io.emit('start_time', start_time);
+
       async function put_video(){
         await video.create({
           idvideo : '',
           locations : location,
+          starttime : start_time,
           fi_count : '0',
           non_count : '0',
           videoplace : "home"
@@ -187,11 +177,11 @@ server.listen(app.get('port'), () => {
     exec('CCTV.bat', function(err, data) {  
        console.log(err);
        console.log(data.toString());                       
-     });  
+    });  
     exec('prediction.bat', function(err, data) {  
        console.log(err);
        console.log(data.toString());                       
-     });  
+    });  
 
     console.log(app.get('port'), '번 포트에서 대기 중');
 });

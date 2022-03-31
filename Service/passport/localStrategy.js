@@ -11,7 +11,6 @@ module.exports=()=>{
         passwordField: 'password',
         passReqToCallback:true,//콜백함수에 req 객체를 넘길지 여부
     }, async(req, idusers, password, done)=>{
-        console.log('LocalStrategy', idusers, password);
         try{
             const exUser = await User.findOne({where: { idusers: req.body.idusers } });
             if(exUser){
